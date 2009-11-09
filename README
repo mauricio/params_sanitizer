@@ -14,7 +14,7 @@ you finally clean it up, instead of cleaning it up just once when the user provi
 
 Insane, heh?
 
-What about stopping with this insanety and cleaning the data once and for all?
+What about stopping with this waste of CPU cycles and cleaning the data once and for all?
 
 Don't worry, you don't have to do anything, it's already done and sorted out for you with this
 dead simple plugin. The params_sanitizer plugin uses Rails own sanitizers to clean the user
