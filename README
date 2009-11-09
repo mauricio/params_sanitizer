@@ -1,0 +1,63 @@
+== params_sanitizer
+
+Have you ever found yourself using the "h" view helper all around your views
+in your applications? Have you ever thought that cleaning up user input in views
+is a tedious, error prone and cumbersome job?
+
+You're not alone.
+
+Think with me, the user provides information *once* to your application, that information
+could be badly formatted, could be an XSS attack, but you store it as the user provided
+in your database. When you're going to show that information, something that could happen
+once or a hundred of times (you probably would like to have thousands of page views, woudn't you?)
+you finally clean it up, instead of cleaning it up just once when the user provided it.
+
+Insane, heh?
+
+What about stopping with this insanety and cleaning the data once and for all?
+
+Don't worry, you don't have to do anything, it's already done and sorted out for you with this
+dead simple plugin. The params_sanitizer plugin uses Rails own sanitizers to clean the user
+input when it's first provided on form POSTs and PUTs (what? do you alter your
+application/database state with GET calls? OMFG!). You can protect all calls to all
+controllers, protect all actions in a single controller and even protect specific actions in
+a single controller, it's your call!
+
+Here are the examples:
+
+* stripping tags from all params in all actions (remember, only POST or PUT actions will really be changed)
+  - strip_tags uses rails full_sanitizer
+
+  class ApplicationController < ActionController::Base
+    strip_tags_from_params
+  end
+
+* stripping tags from all params for all actions in a single controller
+
+  class NewsStoriesController < ApplicationController
+    strip_tags_from_params
+  end
+
+* stripping tags from all params for specific actions in a single controller
+
+  class CommentsController < ApplicationController
+    strip_tags_from_params :only => [ :create, :update ]
+  end
+
+* if instead of stripping all tags, you'd just like to use the simple sanitizer
+  (it removes bad tags like <script> but would leave others intact, uses rails white_list_sanitizer)
+
+  class ApplicationController < ActionController::Base
+    sanitize_params
+  end
+
+  class NewsStoriesController < ApplicationController
+    sanitize_params
+  end
+
+  class CommentsController < ApplicationController
+    sanitize_params :only => [ :create, :update ]
+  end
+
+This plugin depends only on Rails default sanitizers, so you don't need to install
+anything else to have it working.
