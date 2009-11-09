@@ -61,3 +61,7 @@ Here are the examples:
 
 This plugin depends only on Rails default sanitizers, so you don't need to install
 anything else to have it working.
+
+== Installing the plugin:
+
+ruby script/plugin install git://github.com/mauricio/params_sanitizer.git
